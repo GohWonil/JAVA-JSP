@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            border: 3px solid blue;
+            text-align: center;
+            padding: 15px;
+            color: red;
+        }
+        h1:hover{
+            background: lightgreen;
+        }
+    </style>
+
+</head>
+<body>
+    <h1 id="h1byid">자바스크립트</h1>
+    <button id="jsmode">
+        버튼이벤트
+    </button>
+
+    <!-- 자바스크립트로 HTML 태그를 변경하려면 반드시 HTML태그가 로딩되고 그 뒤에 와야합니다. -->
+    <script>
+        // 자바스크립트 DOM api를 이용하여 html과 자바스크립트를 연결한다. id셀렉터로 HTML태그를 찾는 방법이 document.getElemetnById('id이름')메소드이다.
+        const mode = document.getElementById('h1byid')
+        // 찾아서 안의 내용(자막='자바스크립트')을 'HTML + CSS + Javascript'로 바꾸려고 합니다.
+
+        //마우스로 h1태그를 누르면('click') 그순간에 자동실행되는 메소드를 등록하여 마우스를 누르면 h1태그의 내용을 바꿉니다.
+
+        //자바스크립트로 태그와 상호작용하는 방법을 '이벤트'라고 한다.
+        //이벤트가 발생하면 자동으로 자바스크립트가 실행하는 메소드를 이벤트헨들러 또는 이벤트리스너라고 부릅니다. 이벤트는 마우스를 누르거나 화면에 내용이 마지막 줄에 도달하는 경우 등이 되겠습니다. 
+
+        //이벤트와 이벤트 핸들러를 연결하는 메소드가
+        //addEventListener('이벤트종류','이벤트메소드')
+
+        mode.addEventListener('click', 
+        function() {
+            if (mode.innerText = '자바스크립트'){
+                alert("자바스크립트 클릭")
+                
+                mode.innerText = 'HTML + CSS + Javascript'
+            } else {
+                alert("HTML...클릭")
+                mode.innerText = '자바스크립트'
+            }
+        });
+
+        //버튼을 누르면 (click 이벤트) 자동으로 실행하는 메소드(이벤트핸들러)
+        //이벤트를 발생시키는 HTML태그와 이벤트핸들러를 연결(등록)해 놓으면 자바스크릅트가 이벤트가 일어나면 (실행되면) 자동으로 이벤트 핸들러를 실행
+
+        //1.dom API로 이벤트를 발생하는 HTML태그를 찾는다.
+        const jsmode = document.getElementById('jsmode')
+        //2. jsmode가 발생시킨 사건(이벤트)와 이벤트핸들러를 연결(등록)하자
+        //click : 이벤트의 종류
+        //function(){...} : 이벤트 핸들러의 정의
+        jsmode.addEventListener('click',
+            function() {
+                if(jsmode.innerText == "버튼을 누르기전 텍스트"){
+                    jsmode.innerText = "버튼이벤트 발생"
+                } else {
+                    jsmode.innerText = "버튼을 누르기전 텍스트"
+                }
+            }
+        )
+    </script>
+</body>
+</html>
