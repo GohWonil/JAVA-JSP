@@ -45,13 +45,17 @@ public class CookieManager {
 		
 		//요청 객체로 부터 쿠키 배열을 획득
 		Cookie[] cookies = request.getCookies();
-		//쿠키 배열을 돌면서 쿠키 이름이 일치하는 객체가 있는지 확인
+		//브라우저를 통해 처음 접근 했을때 쿠키가 하나도 저장되어 있지 않은 경우 getCookise
+		//메서드를 호출 하면 null을 반환
+		if(cookies != null) {
+			//쿠키 배열을 돌면서 쿠키 이름이 일치하는 객체가 있는지 확인
 			for(Cookie cookie : cookies){
 				if(cookie.getName().equals(name)) {
 					value = cookie.getValue();
 					break;
 				}
 			}
+		}
 		return value;
 	}
 	

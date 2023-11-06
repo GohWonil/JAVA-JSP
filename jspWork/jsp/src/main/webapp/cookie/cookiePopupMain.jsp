@@ -57,6 +57,7 @@ window.onload = function(){
 		console.log('체크박스가 선택 되지 않습니다.')
 		// display속성을 none으로 설정하면 화면에서 숨김처리됨
 		popup.style.display = 'none';
+		
 	}
 }
 
