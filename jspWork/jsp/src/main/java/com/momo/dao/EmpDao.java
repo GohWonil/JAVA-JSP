@@ -6,11 +6,15 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+<<<<<<< HEAD
 import com.momo.common.DBConnPool;
+=======
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 import com.momo.common.DBConnection;
 import com.momo.dto.EmpDto;
 
 /**
+<<<<<<< HEAD
  *데이터 베이스에 접근 해서 데이터 입력, 출력, 삭제, 조회 작업을 처리하는 객체
  *Dao -> mapper
  *
@@ -26,20 +30,47 @@ public class EmpDao extends DBConnPool{
 	/**
 	 *데이터베이스로 부터 사원의 목록을 조회 하여 반환 
 	 *조회된 데이터를 반환하기 위해서 리스트에 담아준다.
+=======
+ * 데이터 베이스에 접근 해서 
+ * 데이터 입력, 출력, 삭제, 조회 작업을 처리하는 객체
+ * 
+ * Dao -> mapper
+ * 
+ */
+public class EmpDao extends DBConnection{
+
+	public EmpDao(ServletContext application) {
+		super(application);
+	}
+	
+	/**
+	 * 데이터베이스로부터 사원의 목록을 조회 하여 반환합니다.
+	 * 조회된 데이터를 반환하기 위해서 리스트에 담아줍니다.
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 	 */
 	public List<EmpDto> getList() {
 		List<EmpDto> list = new ArrayList<>();
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 		try {
 			stmt = con.createStatement();
 			String sql = "select * from employee";
 			
 			rs = stmt.executeQuery(sql);
 			
+<<<<<<< HEAD
 			while(rs.next()) {
 				//System.out.println();
 				//콜솔에 출력하던 데이터를 화면에 출력하기 위해서 리스트에 저장 후 반환
+=======
+			while (rs.next()) {
+				// System.out.println();
+				// 콘솔에 출력 하던 데이터를 
+				// 화면에 출력 하기 위해서 리스트에 저장후 반환 합니다. 
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 				EmpDto dto = new EmpDto();
 				dto.setEmp_id(rs.getString(1));
 				dto.setEmp_name(rs.getString(2));
@@ -47,18 +78,40 @@ public class EmpDao extends DBConnPool{
 				
 				list.add(dto);
 			}
+<<<<<<< HEAD
 			
 			//자원반납
 			close();
 			
+=======
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 		} catch (SQLException e) {
 			System.out.println("SQLException 예외사항 발생");
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		return list;
 	}
+=======
+		
+		return list;
+	}
+	
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 	public static void main(String[] args) {
 		//EmpDao empDao = new EmpDao();
 		//empDao.getList();
 	}
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2

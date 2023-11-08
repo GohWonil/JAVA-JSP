@@ -8,6 +8,10 @@ public class DeptDto {
 	private String national_code;
 	private String local_name;
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 	public String getDept_id() {
 		return dept_id;
 	}
@@ -45,4 +49,8 @@ public class DeptDto {
 		this.local_name = local_name;
 	}
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 }
