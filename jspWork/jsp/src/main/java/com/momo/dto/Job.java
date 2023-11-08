@@ -1,5 +1,11 @@
 package com.momo.dto;
 
+/**
+ * Dto란?
+ * 데이터 전송 객체(Data Transfer Object)
+ * 데이터를 전송하거나 전달하기 위해 사용되는 객체
+ */
+
 public class Job {
 	private String jobCode;
 	private String jobName;

@@ -8,13 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!-- 
 <ul>
-	<li>String: <%= page_str %></li>
-	<li>int: <%= page_int %></li>
-	<li>Person: <%= page_p.getAge() %>/<%= page_p.getName() %></li>
+	<li>String: </%= page_str %></li>
+	<li>int: </%= page_int %></li>
+	<li>Person: </%= page_p.getAge() %>/</%= page_p.getName() %></li>
 </ul> 
-
+ -->
 <ul>
 	<li>String: <%= pageContext.getAttribute("page") %></li>
 	<li>int: <%= pageContext.getAttribute("page_int") %></li>
