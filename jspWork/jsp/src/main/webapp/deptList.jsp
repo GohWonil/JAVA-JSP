@@ -9,17 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<<< HEAD:jspWork/jsp/src/main/webapp/session/ex/loginMain.jsp
-<%=session.getAttribute("userId") %> 님 환영합니다.
-========
 
 <h2>부서목록</h2>
 <%
+
+//jsp를 단독으로 실행할 경우 null이 출력 
 	List<DeptDto> list = (List<DeptDto>)request.getAttribute("list");
 	out.print(list);
 
 %>
 
->>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2:jspWork/jsp/src/main/webapp/deptList.jsp
 </body>
 </html>

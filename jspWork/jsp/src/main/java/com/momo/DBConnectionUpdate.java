@@ -15,8 +15,8 @@ public class DBConnectionUpdate {
 	public static void main(String[] args) {
 		
 		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-		String id = "test";
-		String pw = "1234";
+		String id = "ORCLSTUDY";
+		String pw = "orcl";
 		
 		Connection con = null;
 		Statement stmt = null;

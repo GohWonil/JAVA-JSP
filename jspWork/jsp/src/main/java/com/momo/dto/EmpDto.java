@@ -28,9 +28,4 @@ public class EmpDto {
 	public void setEmp_no(String emp_no) {
 		this.emp_no = emp_no;
 	}
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2
 }

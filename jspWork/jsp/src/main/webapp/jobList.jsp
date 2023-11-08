@@ -1,22 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<<< HEAD:jspWork/jsp/src/main/webapp/session/logoutProcess.jsp
-<%
-	//ì„¸ì…˜ë¬´íš¨í™”
-	session.invalidate();
-	response.sendRedirect("loginForm.jsp");
-%>
-========
-<h2>jobList ì„œë¸”ë¦¿ í˜¸ì¶œê²°ê³¼</h2>
-ì§ê¸‰ëª©ë¡<br>
+<h2>jobList ¼­ºí¸´ È£Ãâ°á°ú</h2>
+Á÷±Ş¸ñ·Ï<br>
 <%=request.getAttribute("list") %>
->>>>>>>> e3e77c0e6fe35215a42cd29a01257b6e3d7919c2:jspWork/jsp/src/main/webapp/jobList.jsp
 </body>
 </html>
