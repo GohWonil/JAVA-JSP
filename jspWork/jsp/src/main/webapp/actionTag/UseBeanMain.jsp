@@ -1,3 +1,4 @@
+<%@page import="javax.swing.border.Border"%>
 <%@page import="com.momo.dto.BoardDto"%>
 <%@page import="com.momo.dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<!-- HTML 주석 -->
+<%-- JAVA 주석 --%>
+<!-- 액션태그의 주석은 자바 주석으로 처리한다. -->
+<%-- 
+	<jsp:useBean> : 자바빈 생성
+	<jsp:setProperty> 	: 자바빈 속성을 저장 합니다
+	<jsp:getProperty> 	: 자바빈 속성을 추출 합니다 
+--%>
 
 <!-- 자바빈 이란?
 	요청 발생시 화면으로 부터 입력받은 데이터를 하나의 객체에 담아 편리하게 사용할 수 있습니다.
@@ -29,17 +39,27 @@
  -->
  
  <!-- 객체생성 -->
+ <%
+ 	BoardDto bDto = new BoardDto();
+ 	bDto.setContent("내용");
+ 	bDto.setTitle("제목");
+ 	request.setAttribute("bDto", bDto);
+ 	//또 다르게 표현하면 아래와 같이 표현 가능 
+ %>
  <jsp:useBean id="boardDto"
  			class="com.momo.dto.BoardDto"
 			scope="request" ></jsp:useBean>
  
+ 
  <!-- setProperty 메소드를 이용해서 속성값을 지정 -->
+ 
  
  <!-- 
  	name : 자바빈즈 이름
  	property : 필드명
  	value : 필드값
   -->
+ 
   <jsp:setProperty property = "content" name = "boardDto" value = "내용"/>
   <jsp:setProperty property = "title" name = "boardDto" value = "제목"/>
   
