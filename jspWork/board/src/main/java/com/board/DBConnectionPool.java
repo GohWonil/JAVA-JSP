@@ -17,6 +17,49 @@ import javax.sql.DataSource;
  */
 public class DBConnectionPool {
 	
+	//DB에 접근하기 위해 필요한 데이터
+	//-> 리소스에 정의 (context.xml에 정의)
+	//DB에 접근하여 쿼리를 질의 하기위해 필요한 객체 선언
+	public Connection con;
+	public Statement stmt;
+	public PreparedStatement pstmt;
+	public ResultSet rs;
+	
+	public DBConnectionPool() {
+		try {
+			Context initContext = new InitialContext();
+			Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
+			con = ds.getConnection();
+			
+		} catch (NamingException e) {
+			System.out.println("======NamingException");
+			e.printStackTrace();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+	
+	}
+	
+	
+	public void close() {
+		try {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(stmt != null) stmt.close();
+			if(con != null) con.close();
+			System.out.println("자원반납 성공");
+
+			
+		} catch (Exception e) {
+			System.out.println("자원 반납 실패");
+			e.printStackTrace();
+		}
+	}
+	
+	
 	//DB로 부터 게시글 1건에 대한 상세 정보를 조회 후 반환
 	public BoardDto getOne(String num) {
 		BoardDto dto = new BoardDto();
@@ -44,44 +87,4 @@ public class DBConnectionPool {
 		return dto;
 	}
 	
-	//DB에 접근하기 위해 필요한 데이터
-	//-> 리소스에 정의 (context.xml에 정의)
-	//DB에 접근하여 쿼리를 질의 하기위해 필요한 객체 선언
-	public Connection con;
-	public Statement stmt;
-	public PreparedStatement pstmt;
-	public ResultSet rs;
-	
-	public DBConnectionPool() {
-		try {
-			Context initContext = new InitialContext();
-			Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
-			con = ds.getConnection();
-			
-		} catch (NamingException e) {
-			System.out.println("======NamingException");
-			e.printStackTrace();
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		}
-	
-	}
-	
-	public void close() {
-		try {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(stmt != null) stmt.close();
-			if(con != null) con.close();
-			System.out.println("자원반납 성공");
-
-			
-		} catch (Exception e) {
-			System.out.println("자원 반납 실패");
-			e.printStackTrace();
-		}
-	}
 }
