@@ -75,8 +75,27 @@ public class BoardDao extends DBConnPool {
 		} return dto;
 	}
 	
-	
-	
+	/**
+	 * 게시글을 삭제합니다.
+	 * @param num: 삭제할 게시물의 번호
+	 * @return res: 삭제된 게시물의 수 
+	 */
+	public int deleteBoard(String num) {
+		int res = 0;
+		String sql = "delete from board where num = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, num);
+			res = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("==SQLException");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 	
 	
 	

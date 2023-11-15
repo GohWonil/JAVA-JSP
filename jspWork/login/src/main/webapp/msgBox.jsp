@@ -7,10 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!-- 메세지 출력후 다른 페이지를 요청 하거나 뒤로가기 합니다. -->
 <script type="text/javascript">
 	alert('<%=request.getAttribute("msg") %>');
-	history.back();
+	//만약 url에 값이 있다면 url 요청(location.href=url)
+	let url = '<%= request.getAttribute("url")%>';
+	if(url != ''){
+		//url로 이동
+		location.href = url;
+	} else {
+		//뒤로가기
+		history.back();
+	}
 </script>
 
 </body>

@@ -1,11 +1,13 @@
 package com.momo.dao;
 
+import java.awt.image.CropImageFilter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.momo.common.DBConnPool;
 import com.momo.dto.BoardDto;
+import com.momo.dto.Criteria;
 
 //DBConnPool
 //톰켓에서 제공해주는 기능을 사용하여 커넷견풀이라는 공간에 커넥션 객체를 미리 생성 해놓고 사용하는 객체
@@ -98,14 +100,28 @@ public class BoardDao extends DBConnPool {
 	
 	
 	/**
-	 * 게시글 목록을 반환합니다
+	 * 게시글 목록을 반환합니다 + 페이징 처리
 	 * @return List<BoardDto>
 	 */
-	public List<BoardDto> getList() {
+	public List<BoardDto> getList(Criteria cri) {
 		List<BoardDto> list = new ArrayList<>();
+		String sql = "select * from "
+				+ "(select rownum rnum, b.* "
+				+ "from "
+				+ "(select * from board order by num desc) "
+				+ "b) "
+				+ "where rnum between ? and ?";
 		
+		//db로 부터 게시글의 목록을 조회 하여 list에 담아 반환 합니다.
 		try {
-			pstmt = con.prepareStatement("select * from board");
+			pstmt = con.prepareStatement(sql);
+			
+			//시작번호 = 끝번호 - (페이지당 게시물수 - 1)
+			pstmt.setInt(1, cri.getStartNum());
+			
+			//끝번호 = 페이지 번호 * 페이지당 게시물수
+			pstmt.setInt(2, cri.getEndNum());
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -129,5 +145,28 @@ public class BoardDao extends DBConnPool {
 		
 		
 		return list;
+	}
+	
+	/**
+	 * 게시글의 총 건수를 조회후 반환
+	 * 집게함수를 이용하여 게시글의 총 건수(count(*))를 구함
+	 * @return 게시글의 총 건수
+	 */
+	public int getTotalCnt() {
+		int res = 0;
+		String sql = "select count(*) from board"; 
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				res = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 }
