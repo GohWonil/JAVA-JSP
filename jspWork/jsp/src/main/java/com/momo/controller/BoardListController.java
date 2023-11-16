@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.momo.dao.BoardDao;
 import com.momo.dto.Criteria;
+import com.momo.dto.PageDto;
 
 @WebServlet("/boardList")
 public class BoardListController extends HttpServlet {
@@ -23,9 +24,11 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("list", dao.getList(cri));
 		
 		//페이지 블럭을 생성하기 위해 필요한 정보를 저장
-		request.setAttribute("cri", cri);
-		request.setAttribute("totalCnt", dao.getTotalCnt());
-		
+//		request.setAttribute("cri", cri);
+//		request.setAttribute("totalCnt", dao.getTotalCnt());
+		int totalCnt = dao.getTotalCnt();
+		PageDto pageDto = new PageDto(totalCnt, cri);
+		request.setAttribute("pageDto", pageDto);
 		//페이지 전환
 		//forward방식으로 전환 하므로 request 영역이 공유됨
 		request.getRequestDispatcher("/session/servletEx/board.jsp").forward(request, response);

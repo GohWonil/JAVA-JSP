@@ -58,6 +58,7 @@ window.onload = function(){
 			
 	(중요)버튼 생성을 했더라도 form안에 버튼이 하나밖에 없다면 해당 버튼은 서브밋 버튼이 된다
  -->
+ 
 <form method = "get" name="loginForm">
 	<%
 		//getAttribute의 반환 타입은 Object이므로 형변환이 필요합니다.
@@ -70,32 +71,36 @@ window.onload = function(){
 		//로그인한 사용자 - 로그아웃 버튼 출력 -> 세션을 만료 시키고 로그인페이지로 이동
 	%>
 		<%=session.getAttribute("userId") %>님 ㅎㅇ.
-		<button id="logoutBtn">로그아웃</button>
+		<button id="logoutBtn" class='btn btn-primary'>로그아웃</button>
 	<%
 		} else {
 		//로그인하지 않은 사용자 - 로그인 버튼 출력 -> 로그인 페이지로 이동
 	%>
-		<button id="logoutBtn">로그인</button>
+		<button id="logoutBtn" class='btn btn-primary'>로그인</button>
 	<% 	
 		}
 	%>
 	<h2>게시글 목록</h2>
-<table border="1">
-	<tr>
-		<th>일련번호</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th>작성자</th>
-		<th>작성일</th>
-		<th>조회수</th>
-	</tr>
+	
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">일련번호</th>
+      <th scope="col">제목</th>
+      <th scope="col">내용</th>
+      <th scope="col">작성자</th>
+      <th scope="col">작성일</th>
+      <th scope="col">조회수</th>
+    </tr>
+  </thead>
+
 	<%	
 	if(request.getAttribute("list") != null){
 		List<BoardDto> list = (List<BoardDto>)request.getAttribute("list"); 
 		for(BoardDto dto :list){
 	%>
 			
-			<tr>
+			<tr scope="row">
 				<td><%= dto.getNum()%></td>
 				<td><a href="/boardRead?num=<%=dto.getNum()%>"><%= dto.getTitle()%></a></td>
 				<td><%= dto.getContent()%></td>
@@ -109,6 +114,18 @@ window.onload = function(){
 	%>
 </table>
 
+<!-- pageNavi include -->
+<%@include file = "PageNavi.jsp" %>
+
+
+
+
+
+
+
+
+
+
 <!-- 페이지 네비게이션 작성
 	- 페이지 번호 pageNo
 	- 페이지블럭당 페이지 수
@@ -120,9 +137,10 @@ window.onload = function(){
  -->
  
  <%
+ /*
  	out.print("<br> 구분선 ");
 	int startNo = 0;
-	int endNo = 0;
+	int endNo = 5;
  //연산을 위해서(올림처리를 위해서) double 타입으로 선언
  //java에서 int/int = int
  	double pagePerBlock = 10.0; 
@@ -155,6 +173,7 @@ window.onload = function(){
  	for(int i=startNo; i<=endNo; i++){
  		out.print("<a href='/boardList?pageNo=" +i+ "'>" + i + "</a> ");
  	}
+ 	*/
  %>
 
 </form>

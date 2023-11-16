@@ -7,37 +7,46 @@ import java.util.List;
 
 import com.login.common.DBConnPool;
 import com.login.dto.BoardDto;
+import com.login.dto.Criteria;
 
 /**
  * DB로 부터 게시글을 조회, 입력, 수정, 삭제 처리를 합니다.
  *
  */
 public class BoardDao extends DBConnPool {
-	public List<BoardDto> getList(){
+	
+	public List<BoardDto> getList(Criteria cri){
 		List<BoardDto> list = new ArrayList<>();
-		String sql = "select num,content,id,to_char(postdate, 'yyyy-mm-dd') postdate,title,visitcount from board";
+		String sql = "select * from "
+				+ "(select rownum rnum, b.* "
+				+ "from "
+				+ "(select * from board order by num desc) "
+				+ "b) "
+				+ "where rnum between ? and ?";
 		//db로 부터 게시글의 목록을 조회하여 list 에 담아 반환
 		
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, cri.getStartNo());
+			pstmt.setInt(2, cri.getEndNo());
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				String num = rs.getString("num");
-				//String content = rs.getString("content");
-				String title = rs.getString("title");
-				String id = rs.getString("id");
-				String postdate = rs.getString("postdate");
-				//String visitcount = rs.getString("visitcount");
-				
-				BoardDto dto = new BoardDto(num, title, "" , id, postdate, "");
-//				BoardDto dto = new BoardDto();
-//				dto.setContent(rs.getString("content"));
-//				dto.setId(rs.getString("id"));
-//				dto.setNum(rs.getString("num"));
-//				dto.setPostdate(rs.getString("postdate"));
-//				dto.setTitle(rs.getString("title"));
-//				dto.setVisitcount(rs.getString("visitcount"));
+//				String num = rs.getString("num");
+//				//String content = rs.getString("content");
+//				String title = rs.getString("title");
+//				String id = rs.getString("id");
+//				String postdate = rs.getString("postdate");
+//				//String visitcount = rs.getString("visitcount");
+//				
+//				BoardDto dto = new BoardDto(num, title, "" , id, postdate, "");
+				BoardDto dto = new BoardDto();
+				dto.setContent(rs.getString("content"));
+				dto.setId(rs.getString("id"));
+				dto.setNum(rs.getString("num"));
+				dto.setPostdate(rs.getString("postdate"));
+				dto.setTitle(rs.getString("title"));
+				dto.setVisitcount(rs.getString("visitcount"));
 				
 				list.add(dto);
 			}
@@ -48,7 +57,7 @@ public class BoardDao extends DBConnPool {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return list;
 	}
 	
 	public BoardDto getOne(String num) {
@@ -114,6 +123,21 @@ public class BoardDao extends DBConnPool {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	public int getTotalCnt() {
+		int total = 0;
+		String sql = "select count(*) from board";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
 	}
 	
 	

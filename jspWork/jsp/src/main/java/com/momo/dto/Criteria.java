@@ -19,7 +19,7 @@ public class Criteria {
 	 * @param amount
 	 */
 	public Criteria() {
-		
+	
 	}
 	
 	public Criteria(String pageNo, String amount) {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.momo.dao.BoardDao;
 import com.momo.dao.MemberDao;
 import com.momo.dto.BoardDto;
+import com.momo.dto.Criteria;
 import com.momo.dto.MemberDto;
 
 
@@ -51,9 +52,10 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("MemberDto", dto);
 
 			//게시글 조회후 request에 담아줍니다.
-//			BoardDao boardDao = new BoardDao (); 
-//			request.setAttribute("list", boardDao.getList());
-//			dao.close();
+			Criteria cri = new Criteria(request.getParameter("pageNo"), request.getParameter("amount"));
+			BoardDao boardDao = new BoardDao (); 
+			request.setAttribute("list", boardDao.getList(cri));
+			dao.close();
 			
 			//sendRedirect를 이용할 경우 , request 영역이 공유가 되지 않기 때문에 list값을 화면으로 전달못함
 			//response.sendRedirect("board.jsp");
@@ -62,7 +64,6 @@ public class LoginController extends HttpServlet {
 			//로그인 실패
 			response.sendRedirect("loginForm.jsp?isError=1");
 		}
-		
 
 	}
 

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 </head>
 <body>
 
@@ -43,19 +45,32 @@
 	}
 %>
 <h2>게시글 목록 조회</h2>
-
-<table border="1">
-	<tr>
-		<th>일련번호</th>
-		<th>제목</th>
-		<th>작성자</th>
-		<th>작성일</th>
-	</tr>
+<!-- On tables -->
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">일련번호</th>
+      <th scope="col">제목</th>
+      <th scope="col">작성자</th>
+      <th scope="col">작성일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</table>
 
 <%
- if(request.getAttribute("list") != null){
-	 List<BoardDto> list = (List<BoardDto>)request.getAttribute("list");
-	 for(BoardDto dto : list){
+	 if(request.getAttribute("list") == null){
+		 out.print("게시글 존재하지 않습니다");
+	 } else {
+		 List<BoardDto> list = (List<BoardDto>)request.getAttribute("list");
+	for(BoardDto dto : list){
 	
 %>
 	<tr>
@@ -67,7 +82,7 @@
 	<% }
 	 }
  	%>
-</table>
+
 
 </body>
 </html>
