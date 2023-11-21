@@ -21,8 +21,8 @@ public class Criteria {
 	public Criteria() {
 		//시작 번호와 끝번호를 구합니다.
 		//페이지 조회 쿼리에서 사용됩니다.
-		endNum = this.pageNo * this.amount;
-		startNum = endNum - (this.amount-1);
+		endNum = pageNo * amount;
+		startNum = endNum - (amount-1);
 	}
 	
 	public Criteria(String pageNo, String amount) {
