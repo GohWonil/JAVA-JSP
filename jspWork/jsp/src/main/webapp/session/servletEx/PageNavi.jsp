@@ -50,14 +50,17 @@ crossorigin="anonymous">
   <ul class="pagination">
   <!-- 앞으로 가기 버튼 시작 disabled : 비활성화  -->
     <li class="page-item <%= pageDto.isPrev() ? "" : "disabled"%>">
-      <a class="page-link" href="/boardList?pageNo=<%=pageDto.getStartNo()-1%>"> 이전</a>
+      <a class="page-link" onclick = "goPage(<%=pageDto.getStartNo()-1%>)">
+      이전</a>
     </li>
   <!-- 앞으로 가기 버튼 끝 -->
    
    <%for(int i = pageDto.getStartNo(); i <= pageDto.getEndNo(); i++){ %>
     <li class="page-item">
+    <!-- href링크로 이동하면 검색어 유지가 안된다 그래서 searchForm을 전송하는 goPage함수를 생성하였다
+    링크를 함수호출로 변경 onClick이벤트가 발생하면 goPage()함수를 호출하여 함수의 파라메터로 페이지 번호를 넣어준다 -->
     	<a class="page-link <%= pageDto.getCri().getPageNo() == i ? "active" : "" %>"
-    	href= "/boardList?pageNo=<%=i %>">
+			onclick="goPage(<%=i %>)">    	
     	<%=i %>
     	</a>
     </li>
@@ -75,12 +78,14 @@ crossorigin="anonymous">
   -->
     	
     <li class="page-item <%= pageDto.isNext() ? "" : "disabled"%>">
-      <a class="page-link" href="/boardList?pageNo=<%=pageDto.getEndNo()+1%>"> 다음</a>
+      <a class="page-link" onclick = "goPage(<%=pageDto.getEndNo()+1 %>)"> 
+      다음</a>
     </li>
    
    
   </ul>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </body>
 </html>

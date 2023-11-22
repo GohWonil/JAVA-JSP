@@ -104,17 +104,26 @@ public class BoardDao extends DBConnPool {
 	 */
 	public List<BoardDto> getList(Criteria cri) {
 		List<BoardDto> list = new ArrayList<>();
-		String sql = "select * from "
+		try {
+			String where = ""; 
+			//검색어와 검색필드에 값이 들어있다면 조건문장을 생성
+			if(!"".equals(cri.getSearchField())
+					&& !"".equals(cri.getSearchWord())) {
+				where = "where " + cri.getSearchField() 
+				+ " like '%" + cri.getSearchWord() + "%'";
+			}
+			
+			System.out.println("where : " + where);
+			
+		pstmt = con.prepareStatement("select * from "
 				+ "(select rownum rnum, b.* "
 				+ "from "
-				+ "(select * from board order by num desc) "
+				+ "(select * from board "
+				+ where
+				+ "order by num desc) "
 				+ "b) "
-				+ "where rnum between ? and ?";
+				+ "where rnum between ? and ?");
 		
-		//db로 부터 게시글의 목록을 조회 하여 list에 담아 반환 합니다.
-		try {
-			pstmt = con.prepareStatement(sql);
-			
 			//시작번호 = 끝번호 - (페이지당 게시물수 - 1)
 			pstmt.setInt(1, cri.getStartNum());
 			
@@ -151,9 +160,18 @@ public class BoardDao extends DBConnPool {
 	 * 집게함수를 이용하여 게시글의 총 건수(count(*))를 구함
 	 * @return 게시글의 총 건수
 	 */
-	public int getTotalCnt() {
+	public int getTotalCnt(Criteria cri) {
 		int res = 0;
-		String sql = "select count(*) from board"; 
+		String where = ""; 
+		//검색어와 검색필드에 값이 들어있다면 조건문장을 생성
+		if(!"".equals(cri.getSearchField())
+				&& !"".equals(cri.getSearchWord())) {
+			where = "where " + cri.getSearchField() 
+			+ " like '%" + cri.getSearchWord() + "%'";
+		}
+		
+		String sql = "select count(*) from board" + where;
+		
 		
 		try {
 			pstmt = con.prepareStatement(sql);
