@@ -46,7 +46,7 @@ public class PageDto {
 		endNo = (int)Math.ceil(cri.getPageNo()/(blockAmount * 1.0)) * blockAmount;
 		startNo = endNo - (blockAmount - 1);
 		//페이지 끝번호
-		realEndNo = (int)Math.ceil(totalCnt / (cri.getAmount() * 1.0));
+		realEndNo = (int)Math.ceil((totalCnt*1.0) / cri.getAmount());
 		
 		//게시물이 67건인 경우 페이지 끝 번호는 7인데 블럭의 끝번호는 10이다.
 		endNo = (endNo>realEndNo)? realEndNo : endNo;

@@ -74,4 +74,16 @@ public class DBConnPool {
 		
 	}
 	
+	public String pageingQuery(String sql) {
+		
+		String before = "select * from (\r\n"
+						+ "    select t.*, ROWNUM rnum from (";
+
+		String after = "    )t \r\n"
+						+ ")\r\n"
+						+ "where rnum between ? and ?";
+		
+		return before + sql + after;
+	}
+	
 }

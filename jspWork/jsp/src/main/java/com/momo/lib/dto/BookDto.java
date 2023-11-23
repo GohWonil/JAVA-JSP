@@ -7,14 +7,26 @@ public class BookDto {
 	private String no;
 	private String title;
 	private String author;
+	private String rentYn;
+	private String rentYnStr;
 	
-
-	public BookDto(String no, String title, String author) {
+	public BookDto() {
+		
+	}
+	
+	public BookDto(String no, String title, String author, String rentYn) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.author = author;
+		this.rentYn = rentYn;
+		rentYnStr = rentYn.equals("Y") ? "대여중" : "";
 	}
+
+	public String toString() {
+		return "[title: " + title + "]";
+	}
+		
 	
 	public String getNo() {
 		return no;
@@ -33,6 +45,24 @@ public class BookDto {
 	}
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getRentYn() {
+		return rentYn;
+	}
+
+	public String getRentYnStr() {
+		return rentYnStr;
+	}
+
+	public void setRentYn(String rentYn) {
+		this.rentYn = rentYn;
+		
+		this.rentYnStr = rentYn.equals("Y") ? "대여중" : "";
+	}
+
+	public void setRentYnStr(String rentYnStr) {
+		this.rentYnStr = rentYnStr;
 	}
 
 }

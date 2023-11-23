@@ -1,10 +1,15 @@
-<%@page import="com.momo.dto.PageDto"%>
 <%@page import="com.momo.dto.Criteria"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+	function goPage(pageNo){
+		searchForm.pageNo.value = pageNo
+		searchForm.submit();
+	}
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -15,7 +20,7 @@ integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQI
 crossorigin="anonymous">
 
 <%
-	PageDto pageDto = null;
+	/* PageDto pageDto = null;
 	//COntroller에서 request 영역에 저장한 pageDto를 화면에서 사용할수 있도록 변수에 저장
 	if(request.getAttribute("pageDto") != null 
 		&& !"".equals(request.getAttribute("pageDto"))){
@@ -23,7 +28,7 @@ crossorigin="anonymous">
 	} else {
 		pageDto = new PageDto(0, new Criteria());
 	}
-
+ */
 	/* pageDto를 사용하여 만듦
 	int totalCnt = 1000;
 	Criteria cri = new Criteria(); //pageNo=1, amount = 10
@@ -44,27 +49,28 @@ crossorigin="anonymous">
  
 </head>
 <body>
-<br>
+pageDto : ${pageDto }
+<br>startNo : ${pageDto.startNo }
+<br>prev : ${pageDto.prev ? "" : "disabled" }
+<br>next : ${pageDto.next ? "" : "disabled" }
 <!-- 페이지 네이션 -->
 <nav aria-label="...">
   <ul class="pagination">
   <!-- 앞으로 가기 버튼 시작 disabled : 비활성화  -->
-    <li class="page-item <%= pageDto.isPrev() ? "" : "disabled"%>">
-      <a class="page-link" onclick = "goPage(<%=pageDto.getStartNo()-1%>)">
+    <li class="page-item ${pageDto.Prev ? '' : 'disabled'}">
+      <a class="page-link" onclick = "goPage(${pageDto.StartNo()-1})">
       이전</a>
     </li>
   <!-- 앞으로 가기 버튼 끝 -->
-   
-   <%for(int i = pageDto.getStartNo(); i <= pageDto.getEndNo(); i++){ %>
+   <c:forEach begin="${pageDto.startNo }" end="${pageDto.endNo }" var="i">
     <li class="page-item">
     <!-- href링크로 이동하면 검색어 유지가 안된다 그래서 searchForm을 전송하는 goPage함수를 생성하였다
     링크를 함수호출로 변경 onClick이벤트가 발생하면 goPage()함수를 호출하여 함수의 파라메터로 페이지 번호를 넣어준다 -->
-    	<a class="page-link <%= pageDto.getCri().getPageNo() == i ? "active" : "" %>"
-			onclick="goPage(<%=i %>)">    	
-    	<%=i %>
-    	</a>
+    	<a class="page-link ${pageDto.cri.pageNo eq i ? 'active' : ''}"
+			onclick="goPage(${i})">	${i}</a>
     </li>
-   <% } %>
+   
+   </c:forEach>
    
     
   <!-- active: 현재 페이지 번호 활성화 
@@ -77,14 +83,15 @@ crossorigin="anonymous">
     </li>
   -->
     	
-    <li class="page-item <%= pageDto.isNext() ? "" : "disabled"%>">
-      <a class="page-link" onclick = "goPage(<%=pageDto.getEndNo()+1 %>)"> 
+    <li class="page-item ${pageDto.Next() ? '' : 'disabled'}">
+      <a class="page-link" onclick = "goPage(${pageDto.EndNo()+1})"> 
       다음</a>
     </li>
    
    
   </ul>
 </nav>
+<!-- 부트스트랩 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </body>

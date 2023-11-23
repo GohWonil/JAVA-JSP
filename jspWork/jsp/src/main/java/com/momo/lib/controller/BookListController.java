@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.momo.lib.dao.BookDao;
+import com.momo.book.dao.BookDao;
+import com.momo.dto.Criteria;
+
 
 
 @WebServlet("/bookList")
@@ -20,7 +22,8 @@ public class BookListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BookDao dao = new BookDao();
-		request.setAttribute("list", dao.getList());
+		Criteria cri = new Criteria();
+		request.setAttribute("list", dao.getList(cri));
 		dao.close();
 		request.getRequestDispatcher("/lib/bookList.jsp").forward(request, response);
 	}
