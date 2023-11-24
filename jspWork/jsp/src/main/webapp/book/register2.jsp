@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 
-    <meta charset="utf-8">
+ <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -23,71 +22,61 @@
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
-	<script>
-	window.onload = function(){
-		console.log('onload event 발생');
-		/* 변수선언 
-		 	var - 변수의 중복선언이 가능
-		 	let - 지역변수, 중복선언 불가능
-		 	const - 지역상수, 중복선언 불가능
-		 */
-		let regBtn = document.querySelector("#regBtn");
-		alert("회원가입");
 
-		// 익명의 함수를 작성 할 수도 있고, 이미 작성된 함수의 이름을 넘겨줄 수도 있다
-		// 함수의 이름을 넣어줄때에는 함수이름 뒤에 ()를 붙이면 안됩니다!!!!!
-		// 함수이름() : 함수를 실행하라는 의미
-		regBtn.addEventListener('click', validationCheck);
-		
-	}
-	
-	function validationCheck(){
-		if(id.value == ""){
-			alert("아이디를 입력해주세요");
-			return false;
-		}
-		if(id.value.length>10){
-			alert("아이디를 10자 초과 안돼");
-			return false;
-		}
-		
-		let name = document.querySelector("#name");
-		if(name.value == ""){
-			alert("이름을 입력해주세요");
-			return false;
-		}
-		if(name.value.length>15){
-			alert("이름이 15자 초과 안돼");
-			return false;
-		}
-		
-		if(email.value == ""){
-			alert("이메일을 입력해주세요");
-			return false;
-		}
-		if(pw.value == ""){
-			alert("비밀번호를 입력해주세요");
-			return false;
-		}
-		
-		// 등록 요청
-		regForm.action = "/book/regProcess"; // 요청 URL 설정
-		regForm.method = "post"; 
-		// 폼을 전송 -> 새로운 페이지를 요청
-		regForm.submit();
-		
-		function getByteLength(str) {
-		  // TextEncoder 객체 생성 (UTF-8 사용) : 한글 3byte로 계산됨
-		  var encoder = new TextEncoder('utf-8');
-		  // 문자열을 바이트 배열로 인코딩
-		  var encoded = encoder.encode(str);
-		  // 바이트 배열의 길이 반환
-		  return encoded.length;
-		} 
-	
-	}
-	</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
+
+<script type="text/javascript">
+	window.onload = function(){
+		submitBtn.addEventListener('click', function(){
+			console.log('event', event)
+			event.preventDefault(); 
+			console.log('기본 이벤트 제거');
+			
+			let res = validateForm(testForm);
+			if(res){
+				testForm.submit();
+			}
+		});
+	}
+	
+	function validateForm(form){
+		if(form.id.value == ''){
+			alert('id');
+			form.id.focus();
+			return false;
+		}
+		if(form.name.value == ''){
+			alert('name');
+			form.name.focus();
+			return false;
+		}
+		if(form.email.value == ''){
+			alert('email');
+			form.email.focus();
+			return false;
+		}
+		if(form.pw.value == ''){
+			alert('pw');
+			form.pw.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+<!-- 
+<form name="testForm">
+	이름: <input type="text" name="name"><br>
+
+	국어: <input type="text" name="kor" ><br>
+	영어: <input type="text" name="eng" ><br>
+	수학: <input type="text" name="math" ><br>
+	<button id="submitBtn">전송</button>
+</form>
+
+id, name, email, pw
+ -->
 
 <body class="bg-gradient-primary">
 
@@ -103,30 +92,32 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
                             </div>
-                            <form name="regForm" class="user">
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" 
-                                    	id="id" name="id" placeholder="id 입력" >
+                            <form name="testForm">
+                                <div class="form-group row">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="id" name="id" placeholder="id">
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" 
-                                    	id="name" name="name" placeholder="이름 입력" >
+                                <div class="form-group row">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="name" name="name" placeholder="이름을 입력해주세요">
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="email"
-                                       name="email" placeholder="email 입력 ">
+                                        name="email" placeholder="email">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="pw" name="pw" placeholder="Password 입력">
+                                            id="pw" name="pw" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="pwCheck" placeholder="Repeat Password 확인">
+                                            id="pwCheck" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <a id="regBtn" class="btn btn-primary btn-user btn-block">
+                                <button id ="submitBtn" class="btn btn-primary btn-user btn-block">전송</button>
+                                
+                                <a href="login.html" class="btn btn-primary btn-user btn-block">
                                     회원가입
                                 </a>
                                 <hr>
@@ -137,6 +128,7 @@
                                     <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
                                 </a>
                             </form>
+                           
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
@@ -163,5 +155,4 @@
     <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
-
 </html>

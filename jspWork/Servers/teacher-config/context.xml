@@ -22,17 +22,8 @@
     <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 
-	<Resource name="jdbc/myoracle" auth="Container"
-      type="javax.sql.DataSource" 
-      driverClassName="oracle.jdbc.OracleDriver"
-      url="jdbc:oracle:thin:@localhost:1521:orcl"
-      username="ORCLSTUDY" 
-      password="orcl" 
-      maxTotal="20" 
-      maxIdle="10"
-      maxWaitMillis="-1"/> 
-
-
+<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="orcl" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:orcl" username="ORCLSTUDY"/> 
+      
     <!-- Uncomment this to disable session persistence across Tomcat restarts -->
     <!--
     <Manager pathname="" />
