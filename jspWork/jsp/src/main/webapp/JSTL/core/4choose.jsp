@@ -80,7 +80,7 @@
 	수학: <input type="text" name="math" ><br>
 	<button id="submitBtn">전송</button>
 </form>
-<!-- 방식 2 -->
+<!-- 방식 2 
 <form name = "testForm1">
 	국어: <input type = "text" name = "kor" ><br>
 	영어: <input type = "text" name = "eng" ><br>
@@ -88,13 +88,12 @@
 	<button onClick = "return validateForm(testForm1);">전송</button>
 </form>
 
-<!-- 방식 3 -->
 <form name = "testForm2" onsubmit="return validateForm(testForm2);">
 	국어: <input type = "text" name = "kor" ><br>
 	영어: <input type = "text" name = "eng" ><br>
 	수학: <input type = "text" name = "math" ><br>
 	<button>전송</button>
-</form>
+</form> -->
 
 
 
