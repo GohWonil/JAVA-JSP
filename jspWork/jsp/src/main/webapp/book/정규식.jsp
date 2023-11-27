@@ -1,54 +1,137 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style type="text/css">
-	.areal{
+	.area1 {
 		border : 1px solid;
-		width : 500px;
-		height : 300px;
-		overflow : scroll;
+		width: 500px;
+		height: 300px;
+		overflow: scroll;
 	}
 </style>
-
 </head>
 <body>
-
-
 <script type="text/javascript">
-window.onload = function(){
-	btn1.addEventListener('click', function(){
-		//»ı¼ºÀÚ¸¦ ÀÌ¿ëÇÑ Á¤±Ô Ç¥Çö½Ä °´Ã¼ »ı¼º
-		//»ı¼ºÀÚÀÇ ¸Å°³°ª : ÆĞÅÏ¹®ÀÚ¿­ ÁöÁ¤
-		let regExp = new RegExp('script');
-	
-		console.log(regExp, typeof(regExp), regExp instanceof RegExp);
-	});
-}
+	window.onload = function(){
+		btn1.addEventListener('click', function(){
+			// ì •ê·œì‹ : íŒ¨í„´ ìƒì„±
+			// ì „í™”ë²ˆí˜¸ ìˆ«ì3-ìˆ«ì4-ìˆ«ì4
+			// ì˜ë¬¸ëŒ€ì†Œì,ëª‡ê°€ì§€ê¸°í˜¸(.$)@ì˜ë¬¸ì.ì˜ë¬¸ì
+			
+			
+			// ìƒì„±ìë¥¼ ì´ìš©í•œ ì •ê·œ í‘œí˜„ì‹ ê°ì²´ ìƒì„±
+			// ìƒì„±ìì˜ ë§¤ê°œê°’ : íŒ¨í„´ë¬¸ìì—´ì„ ì§€ì •
+			let regExp = new RegExp('script');
+			console.log(regExp, typeof(regExp), regExp instanceof RegExp);
+			
+		    // ë¦¬í„°ëŸ´ì„ ì´ìš©í•œ ì •ê·œ í‘œí˜„ì‹ ê°ì²´ ìƒì„±
+		    // íŒ¨í„´ ì–‘ìª½ì— /ë¡œ ì‘ì„±í•œë‹¤.(ì‹œì‘ ê¸°í˜¸, ì¢…ë£Œ ê¸°í˜¸)
+			let regExp1 = /script/;
+			console.log(regExp1, typeof(regExp1), regExp1 instanceof RegExp);
+			
+		    /* RegExp ê°ì²´ì—ì„œ ì œê³µí•˜ëŠ” ë©”ì†Œë“œ
+	            ê°ì²´.test(ë¬¸ìì—´) : ë¬¸ìì—´ì— ì •ê·œì‹ íŒ¨í„´ì„ ë§Œì¡±í•˜ëŠ” ê°’ì´ ìˆìœ¼ë©´ true, ì—†ìœ¼ë©´ falseë¥¼ ë¦¬í„´í•œë‹¤.
+	            ê°ì²´.exec(ë¬¸ìì—´) : ë¬¸ìì—´ì— ì •ê·œì‹ íŒ¨í„´ì„ ë§Œì¡±í•˜ëŠ” ê°’ì´ ìˆìœ¼ë©´ ì²˜ìŒ ë§¤ì¹˜ëœ ë¬¸ìì—´ ë¦¬í„´í•œë‹¤.
+            */
+            
+            let str1 = "javascript jquery ajax";
+            let str2 = "java jquery ajax";
+            
+            regExp.test(str1);
+            regExp.test(str2);
+            
+           	area1.innerHTML = "regExp.test(str1) : " + regExp.test(str1) + "<br>";
+           	area1.innerHTML += "regExp.test(str2) : " + regExp.test(str2) + "<br>";
+			
+           	area1.innerHTML += "regExp.exec(str1) : " + regExp.exec(str1) + "<br>";
+           	area1.innerHTML += "regExp.exec(str2) : " + regExp.exec(str2) + "<br>";
+           	
+           	/*
+           		ìˆ«ì : \d
+           		+ : 1ê°œ ì´ìƒ
+           		$ :ë¬¸ìì—´ì˜ ëì„ ì˜ë¯¸
+           	*/
+           	// ìˆ«ìê°€ 1ê°œ ì´ìƒ
+           	let num = /\d+/;
+           	let num1 = /\d+$/;
+           	console.log("num.test('0123')", num.test('0123'));
+           	console.log("num.test('0123aa')", num.test('0123aa'));
+           	
+           	console.log("num1.test('0123')", num1.test('0123'));
+           	console.log("num1.test('0123aa')", num1.test('0123aa'));
+           	
+           	/*
+           		ì „í™”ë²ˆí˜¸ ì²´í¬
+           		ìˆ«ì3ê°œ-ìˆ«ì4ê°œ-ìˆ«ì3ê°œ
+				x{ë°˜ë³µíšŸìˆ˜}
+           		x{3} : xxx
+           		\d{3}-\d{4}-\d{4}
+           	*/
+           	let phone = /\d{3}-\d{4}-\d{3}$/;
+           	console.log('phone1 : ', phone.test('000-0000-0000'));
+           	console.log('phone2 : ', phone.test('000'));
+           	console.log('phone3 : ', phone.test('aaa-aaaa-aaaa'));
+           	
+           	/*
+           		^ : ì‹œì‘
+           		$ : ì¢…ë£Œ
+           		\w : ì•ŒíŒŒë²³ ë¬¸ìì™€ ìˆ«ì 
+           		\.- : .,-
+           		
+           		[ì˜ëŒ€ì†Œë¬¸ì,ìˆ«ì,.,-] í•œë²ˆì´ìƒ @ [ì˜ëŒ€ì†Œë¬¸ì, ìˆ«ì, . -] í•œë²ˆì´ìƒ . ì˜ì–´ëŒ€ì†Œë¬¸ì 2ë²ˆì´ìƒ
+           		
+           	*/
+           	let email = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+           	console.log('email', email.test('momo.class5@gmail.com'));
+           	console.log('email', email.test('momo.class5gmail.com'));
+           	console.log('email', email.test('momo.class5@gmailcom'));
+           	
+           	
+			/* ë°•ìŠ¤ì•ˆì— ì¶œë ¥ í•˜ê¸°
+			area1.innerHTML = "test"
+							+"<table border='1'>              "
+							+"	<tr>               "
+							+"		<td>test1</td> "
+							+"		<td>test2</td> "
+							+"		<td>test3</td> "
+							+"	</tr>              "
+							+"</table>             ";
+			*/
+			
+		});
+	}
 </script>
 
-<h1>Á¤±Ô Ç¥Çö½Ä</h1>
+<table>
+	<tr>
+		<td>test1</td>
+		<td>test2</td>
+		<td>test3</td>
+	</tr>
+</table>
+
+
+   <h1>ì •ê·œ í‘œí˜„ì‹</h1>
     <p>
-        Á¤±Ô Ç¥Çö½Ä(Regular Expresison)ÀÌ¶õ, <br>
-        Æ¯Á¤ ±ÔÄ¢À» °¡Áø ¹®ÀÚ¿­À» °Ë»öÇÏ°Å³ª Ä¡È¯ÇÒ ¶§ »ç¿ëÇÏ´Â Çü½Ä ¾ğ¾îÀÌ´Ù. <br><br>
+        ì •ê·œ í‘œí˜„ì‹(Regular Expresison)ì´ë€, <br>
+        íŠ¹ì • ê·œì¹™ì„ ê°€ì§„ ë¬¸ìì—´ì„ ê²€ìƒ‰í•˜ê±°ë‚˜ ì¹˜í™˜í•  ë•Œ ì‚¬ìš©í•˜ëŠ” í˜•ì‹ ì–¸ì–´ì´ë‹¤. <br><br>
 
-        Á¤±Ô Ç¥½ÄÀ» ÀÌ¿ëÇÏ¸é ÀÔ·ÂµÈ ¹®ÀÚ¿­¿¡ ´ëÇØ Æ¯Á¤ Á¶°Ç °Ë»öÀÌ³ª Ä¡È¯ ½Ã
-        º¹ÀâÇÑ Á¶°ÇÀ» Á¦½ÃÇÒ ÇÊ¿ä ¾øÀÌ °£´ÜÇÏ°Ô Ã³¸®°¡ °¡´ÉÇÏ´Ù.
-    </p> 
-    
-    
-<h2>1. Á¤±Ô Ç¥Çö½Ä °´Ã¼ »ı¼º</h2>
-<p>
-    Á¤±Ô Ç¥Çö½Ä °´Ã¼¸¦ »ı¼ºÇÏ±â À§ÇØ¼­´Â Á¤±Ô Ç¥Çö½Ä ¸®ÅÍ·²°ú RegExp »ı¼ºÀÚ ÇÔ¼ö¸¦ »ç¿ëÇÑ´Ù. <br>
-    ¸®ÅÍ·²À» »ç¿ëÇÏ´Â °ÍÀÌ ÀÏ¹İÀûÀÌ´Ù. (/ÆĞÅÏ/ÇÃ·¡±×)
-</p> 
+        ì •ê·œ í‘œì‹ì„ ì´ìš©í•˜ë©´ ì…ë ¥ëœ ë¬¸ìì—´ì— ëŒ€í•´ íŠ¹ì • ì¡°ê±´ ê²€ìƒ‰ì´ë‚˜ ì¹˜í™˜ ì‹œ
+        ë³µì¡í•œ ì¡°ê±´ì„ ì œì‹œí•  í•„ìš” ì—†ì´ ê°„ë‹¨í•˜ê²Œ ì²˜ë¦¬ê°€ ê°€ëŠ¥í•˜ë‹¤.
+    </p>
 
-<button id="btn1"/>
-<div id="areal" class="areal"></div>
+    <h2>1. ì •ê·œ í‘œí˜„ì‹ ê°ì²´ ìƒì„±</h2>
+    <p>
+        ì •ê·œ í‘œí˜„ì‹ ê°ì²´ë¥¼ ìƒì„±í•˜ê¸° ìœ„í•´ì„œëŠ” ì •ê·œ í‘œí˜„ì‹ ë¦¬í„°ëŸ´ê³¼ RegExp ìƒì„±ì í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•œë‹¤. <br>
+        ë¦¬í„°ëŸ´ì„ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ ì¼ë°˜ì ì´ë‹¤. (/íŒ¨í„´/í”Œë˜ê·¸)
+    </p>
+    
+    <button id="btn1">ì‹¤í–‰</button>
+    <div id="area1" class="area1"></div>
 
 </body>
 </html>
