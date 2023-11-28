@@ -146,7 +146,7 @@ public class BookDao extends DBConnPool{
 			    values(seq_book_no.nextval, 'title', 'N', 'author');
 		 */
 		String sql = "insert into book(no, title, rentyn, author) \r\n"
-				+ "    values(seq_book_no.nextval, '?', 'N', '?')";
+				+ "    values(seq_book_no.nextval, ?, 'N', ?)";
 		int res = 0;
 		
 		try {
@@ -164,7 +164,7 @@ public class BookDao extends DBConnPool{
 		}
 				
 				
-		return 0;
+		return res;
 	}
 	
 }

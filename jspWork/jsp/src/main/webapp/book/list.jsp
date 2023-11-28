@@ -19,20 +19,21 @@
 </style>
 <script type="text/javascript">
 window.onload = function(){
-	//요소선택
-	let regBtn = document.querySelector("#regBtn")
 	
-	//이벤트 부여
-	regBtn.addEventListener('click',function(){
-		location.href = "book/reg.jsp";
+	// 요소선택
+	let regBtn = document.querySelector("#regBtn");
+	
+	// 이벤트 부여
+	regBtn.addEventListener('click', function(){
+		location.href = "/book/reg.jsp";
 	});
 	
-	searchBtn.addEventListener('click',function(){
-		
-		searchForm.submit();		
-	});
+	searchBtn.addEventListener('click', function(){
+		searchForm.action = "/book/list";
+		searchForm.submit();
+	})
+	
 }
-
 /*
  	스크립트에서 함수를 정의 하는 방법
 	function 함수명(파람0, 파람1, ...){
@@ -74,21 +75,24 @@ function view(no){
         </div>
         <div class="card-body">
             <div class="table-responsive">
-			<!-- form submit() 
-			폼이 가지고 있는 요소를 파라메터로 서버에 요청(action)을 하는것
-			(action)이 등록되어 있지 않으면 현재 페이지를 다시 요청함
-			 -->
-				<form name="searchForm">
-<%-- 				pageNo : <input type="text" name="pageNo" value="${pageDto.cri.pageNo }">
-				num : <input tupe="text" name="no" value="">--%>
+                          
+                <!-- form submit()
+                	폼이 가지고 있는 요소를 파라메터로 서버에 요청(action)을 하는것 
+                	(action이 등록되어 있지 않은경우 현재 페이지를 다시 요청함)
+                	-->
+                <form name="searchForm">
+                <%-- 
+				pageNo : <input type="text" name="pageNo" value="${pageDto.cri.pageNo }">
+				num : <input type="text" name="no" value="">
+				--%>
 				<div class="input-group">
-				  <select class="form-select" name="searchField" id="inputGroupSelect04" aria-label="Example select with button addon">
+				  <select class="w-25 form-select" name="searchField" id="inputGroupSelect04" aria-label="Example select with button addon">
 				    <!-- 선택된 요소의 value값이 서버로 넘어 갑니다. -->
 					<option value="title" 
 							${pageDto.cri.searchField eq 'title' ? 'selected' : ''}
 							>도서명</option>
 					<option value="author" 
-							${pageDto.cri.searchField eq '"author"' ? 'selected' : ''}
+							${pageDto.cri.searchField eq 'author' ? 'selected' : ''}
 							>작가명</option>
 				  </select>
 				  <input type="text" name="searchWord" value="${pageDto.cri.searchWord }" class="form-control" aria-label="Text input with dropdown button">
@@ -97,8 +101,7 @@ function view(no){
 				
 				</form>
 				<br>
-				
-		<p><button type="button" class="btn btn-danger" id="regBtn">도서등록</button></p>	
+			<p><button type="button" class="btn btn-dark" id="regBtn">도서등록</button></p>
             <!-- id="dataTable" 를 삭제 해주시면 페이징및 검색이 생성되지 않음  -->
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <thead>

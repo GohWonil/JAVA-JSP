@@ -31,6 +31,10 @@
 	 		<td>${fileDto.ofile }</td>
 	 		<td>${fileDto.sfile }</td>
 	 		<td>${fileDto.postdate}</td>
+	 		<td>
+	 			<a href = "/upload/filedownload.jsp?ofile=다운로드1.jpeg&sfile=다운로드1.jpeg">
+	 			${fileDto.ofile }
+	 			</a>
 	 	</tr>
 	</c:forEach>
 	
@@ -40,6 +44,10 @@
 		</tr>
 	</c:if>	
 	
+	
 </table>
+
+<!-- ofile:원본 파일명, sfile: 저장된 파일명 -->
+<a href="filedownload.jsp?ofile=다운로드1.jpeg&sfile=다운로드1.jpeg">파일다운로드</a>
 </body>
 </html>
